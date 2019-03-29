@@ -9,6 +9,24 @@ Answer *get_indices_of_item_weights(int *weights, int length, int limit)
 
   // YOUR CODE HERE
 
+  static Answer answer;
+  int target;
+
+  for (int i = 0; i < length; i++) {
+    hash_table_insert(ht, weights[i], i);
+  }
+  
+  for (int i = 0; i < length; i++) {
+    target = limit - weights[i];
+    int htr = hash_table_retrieve(ht, target);
+    if (htr != -1) {
+        // Answer answer = {.index_1 = i, .index_2 = htr};
+        answer.index_2 = i;
+        answer.index_1 = htr;
+        return &answer;   
+    } 
+  }
+  
   return NULL;
 }
 
