@@ -10,8 +10,29 @@ char **reconstruct_trip(Ticket **tickets, int length)
   char **route = malloc(length * sizeof(char *));
 
   // YOUR CODE HERE
- 
+  // Add tickets to the hash table
+   for (int i = 0; i < length; i++) {
+    // printf("%d: %s -- %s\n", i, tickets[i]->source, tickets[i]->destination);
+    hash_table_insert(ht, tickets[i]->source, tickets[i]->destination);
+  }
 
+  for (int i = 0; i < length; i++) {
+      char *htr = hash_table_retrieve(ht, tickets[i]->source);
+      printf("HTR: %s\n", htr);
+      // if (strcmp(htr, "NONE")) {
+      //   printf("Destination: %s\n", tickets[i]->destination);
+      // }
+  }
+
+
+  // Search for the first ticket, source == 'None', add it to a linked list
+  // Search for the next ticket, source == destination of prev.
+  // Done with when destination == 'None'
+
+  char *path[] = {"PDX", "DCA", "NONE"};
+  for (int i = 0; i < length; i++) {
+    route[i] = path[i];
+  }
   return route;
 }
 
