@@ -94,7 +94,7 @@ char *all_tests()
   mu_suite_start();
 
   mu_run_test(test_short_case);
-  // mu_run_test(test_long_case);
+  mu_run_test(test_long_case);
 
   return NULL;
 }

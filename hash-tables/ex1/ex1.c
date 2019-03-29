@@ -9,7 +9,8 @@ Answer *get_indices_of_item_weights(int *weights, int length, int limit)
 
   // YOUR CODE HERE
 
-  static Answer answer;
+  Answer *answer;
+  answer = malloc(sizeof(Answer));
   int target;
 
   // Populate hash table
@@ -22,9 +23,10 @@ Answer *get_indices_of_item_weights(int *weights, int length, int limit)
     target = limit - weights[i];
     int htr = hash_table_retrieve(ht, target);
     if (htr != -1) {
-        answer.index_2 = i;
-        answer.index_1 = htr;
-        return &answer;   
+        answer->index_2 = i;
+        answer->index_1 = htr;
+        free(ht);
+        return answer;   
     } 
   }
   
