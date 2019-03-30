@@ -25,11 +25,11 @@ Answer *get_indices_of_item_weights(int *weights, int length, int limit)
     if (htr != -1) {
         answer->index_2 = i;
         answer->index_1 = htr;
-        free(ht);
+        destroy_hash_table(ht);
         return answer;   
     } 
   }
-  
+  destroy_hash_table(ht);
   return NULL;
 }
 
