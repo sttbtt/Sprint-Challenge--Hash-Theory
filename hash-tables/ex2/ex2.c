@@ -16,18 +16,15 @@ char **reconstruct_trip(Ticket **tickets, int length)
     hash_table_insert(ht, tickets[i]->source, tickets[i]->destination);
   }
 
-  char *None = "NONE";
   char *target = "NONE";
   int i = 0;
 
-  while (hash_table_retrieve(ht, target) != None) {
+  while ((strcmp(hash_table_retrieve(ht, target), "NONE")) != 0) {
     route[i] = hash_table_retrieve(ht, target);
     target = route[i];
     i++;
   }
-  target = hash_table_retrieve(ht, target);
-  route[i] = target;
-  
+  route[i] = hash_table_retrieve(ht, target);
   destroy_hash_table(ht);
   return route;
 }
