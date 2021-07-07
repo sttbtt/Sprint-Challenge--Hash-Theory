@@ -9,6 +9,27 @@ Answer *get_indices_of_item_weights(int *weights, int length, int limit)
 
   // YOUR CODE HERE
 
+  Answer *answer;
+  answer = malloc(sizeof(Answer));
+  int target;
+
+  // Populate hash table
+  for (int i = 0; i < length; i++) {
+    hash_table_insert(ht, weights[i], i);
+  }
+  
+  // Look for limit - weight
+  for (int i = 0; i < length; i++) {
+    target = limit - weights[i];
+    int htr = hash_table_retrieve(ht, target);
+    if (htr != -1) {
+        answer->index_2 = i;
+        answer->index_1 = htr;
+        destroy_hash_table(ht);
+        return answer;   
+    } 
+  }
+  destroy_hash_table(ht);
   return NULL;
 }
 

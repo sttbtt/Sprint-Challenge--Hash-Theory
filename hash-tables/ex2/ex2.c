@@ -11,6 +11,21 @@ char **reconstruct_trip(Ticket **tickets, int length)
 
   // YOUR CODE HERE
 
+  // Add tickets to the hash table
+   for (int i = 0; i < length; i++) {
+    hash_table_insert(ht, tickets[i]->source, tickets[i]->destination);
+  }
+
+  char *target = "NONE";
+  int i = 0;
+
+  while ((strcmp(hash_table_retrieve(ht, target), "NONE")) != 0) {
+    route[i] = hash_table_retrieve(ht, target);
+    target = route[i];
+    i++;
+  }
+  route[i] = hash_table_retrieve(ht, target);
+  destroy_hash_table(ht);
   return route;
 }
 
@@ -20,8 +35,6 @@ void print_route(char **route, int length)
     printf("%s\n", route[i]);
   }
 }
-
-
 
 #ifndef TESTING
 int main(void)
